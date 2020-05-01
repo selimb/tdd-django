@@ -14,7 +14,7 @@ STAGING_SERVER = os.environ.get("STAGING_SERVER")
 class TestNewVisitor(StaticLiveServerTestCase):
     @staticmethod
     def _mk_browser():
-        return webdriver.Chrome()
+        return webdriver.Firefox()
 
     def setUp(self):
         self.browser = self._mk_browser()
