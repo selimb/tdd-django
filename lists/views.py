@@ -20,7 +20,7 @@ def new_list(request: HttpRequest):
         list_.delete()
         error = "You can't have an empty list item"
         return render(request, "home.html", {"error": error})
-    return redirect(f"/lists/{list_.id}/")
+    return redirect(list_)
 
 
 def view_list(request: HttpRequest, list_id: str):
@@ -32,7 +32,7 @@ def view_list(request: HttpRequest, list_id: str):
             item = Item(text=request.POST["item_text"], list=list_)
             item.full_clean()
             item.save()
-            return redirect(f"/lists/{list_.id}/")
+            return redirect(list_)
         except ValidationError:
             error = "You can't have an empty list item"
 
