@@ -34,7 +34,6 @@ class TestNewVisitor(FunctionalTest):
         # enters "Use peacock feathers to make a fly" (Edith is very methodical)
         inputbox = self.browser.find_element_by_id("id_new_item")
 
-        time.sleep(0.1)
         inputbox.send_keys("Use peacock feathers to make a fly")
         inputbox.send_keys(Keys.ENTER)
 

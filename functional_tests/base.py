@@ -12,7 +12,7 @@ MAX_WAIT = 3
 class FunctionalTest(StaticLiveServerTestCase):
     @staticmethod
     def _mk_browser():
-        return webdriver.Firefox()
+        return webdriver.Chrome()
 
     def setUp(self):
         self.browser = self._mk_browser()
