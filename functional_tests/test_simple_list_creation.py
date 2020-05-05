@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.keys import Keys
 
 from .base import FunctionalTest
@@ -31,12 +33,14 @@ class TestNewVisitor(FunctionalTest):
         # There is still a text box inviting her to add another item. She
         # enters "Use peacock feathers to make a fly" (Edith is very methodical)
         inputbox = self.browser.find_element_by_id("id_new_item")
+
+        time.sleep(0.1)
         inputbox.send_keys("Use peacock feathers to make a fly")
         inputbox.send_keys(Keys.ENTER)
 
         # The page updates again, and now shows both items on her list
-        self.wait_for_row_in_list_table("1: Buy peacock feathers")
         self.wait_for_row_in_list_table("2: Use peacock feathers to make a fly")
+        self.wait_for_row_in_list_table("1: Buy peacock feathers")
 
         # Satisfied, she goes back to sleep
 
