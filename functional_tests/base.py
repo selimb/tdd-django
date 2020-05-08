@@ -12,7 +12,9 @@ MAX_WAIT = 3
 class FunctionalTest(StaticLiveServerTestCase):
     @staticmethod
     def _mk_browser():
-        return webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        return webdriver.Chrome(options=options)
 
     def setUp(self):
         self.browser = self._mk_browser()
@@ -24,6 +26,9 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def visit_home_page(self):
         self.browser.get(self.live_server_url)
+
+    def get_item_input_box(self):
+        return self.browser.find_element_by_id("id_text")
 
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
