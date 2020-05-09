@@ -15,6 +15,12 @@ class TestUserModel(TestCase):
         user = User(email="a@b.com")
         self.assertEqual(user.pk, "a@b.com")
 
+    def test_no_problem_with_auth_login(self):
+        user = User.objects.create(email="edith@example.com")
+        # user.backend = ""
+        request = self.client.request().wsgi_request
+        auth.login(request, user)
+
 
 class TestTokenModel(TestCase):
     def test_links_user_with_auto_generated_uid(self):

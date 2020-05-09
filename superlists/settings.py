@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     "accounts",
 ]
 
-AUTH_USER_MODEL = "accounts.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -129,3 +128,16 @@ LOGGING = {
     "loggers": {"django": {"handlers": ["console"]}},
     "root": {"level": "INFO"},
 }
+
+# Auth
+
+AUTH_USER_MODEL = "accounts.User"
+AUTHENTICATION_BACKENDS = ["accounts.authentication.PasswordlessAuthenticationBackend"]
+
+# Email
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "selim.belhaouane@gmail.com"
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
