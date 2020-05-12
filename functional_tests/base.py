@@ -5,8 +5,15 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 
-STAGING_SERVER = os.environ.get("STAGING_SERVER")
+from .server_tools import reset_database
+
 MAX_WAIT = 3
+
+STAGING_SERVER = os.getenv("STAGING_SERVER")
+TEST_MAIL_USERNAME = "selim.belhaouane+testing@gmail.com"
+TEST_MAIL_PASSWORD = ""
+if STAGING_SERVER:
+    TEST_MAIL_PASSWORD = os.environ["TEST_MAIL_PASSWORD"]
 
 
 def wait(fn):
@@ -34,6 +41,7 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.browser = self._mk_browser()
         if STAGING_SERVER:
             self.live_server_url = "http://" + STAGING_SERVER
+            reset_database(STAGING_SERVER)
 
     def tearDown(self):
         self.browser.quit()
